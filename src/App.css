@@ -18,10 +18,29 @@
 }
 
 .App-input {
-  width: 80%;
+  width: 100%;
   height: 38px;
   font-size: 15px;
   padding: 8px 16px;
+}
+
+.App-autocomplete {
+  position: absolute;
+  background: white;
+  color: #333;
+  left: 0;
+  right: 0;
+  text-align: left;
+}
+
+.App-autocomplete-item {
+  padding: 4px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.App-autocomplete-item.item-highlighted {
+  background: #d9d9d9;
+  cursor: pointer;
 }
 
 .App-intro {

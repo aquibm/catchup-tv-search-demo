@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+import Autocomplete from 'react-autocomplete'
 import './App.css'
 
 class App extends Component {
@@ -8,8 +8,7 @@ class App extends Component {
         searchResults: []
     }
 
-    _onSearchInput = async event => {
-        const value = event.target.value
+    _onSearchInput = async (event, value) => {
         let results = []
 
         if (value) {
@@ -24,28 +23,49 @@ class App extends Component {
         })
     }
 
+    _selectItem = value => {
+        this.setState({
+            searchValue: value,
+            searchResults: []
+        })
+    }
+
     render() {
         const { searchValue, searchResults } = this.state
 
         return (
             <div className="App">
                 <div className="App-header">
-                    <input
+                    <Autocomplete
                         className="App-input"
-                        type="text"
-                        placeholder="Search for TV shows"
                         value={searchValue}
+                        items={searchResults}
                         onChange={this._onSearchInput}
-                        autoFocus
+                        onSelect={this._selectItem}
+                        getItemValue={item => item.name}
+                        wrapperStyle={{
+                            position: 'relative',
+                            display: 'inline-block',
+                            width: '80%'
+                        }}
+                        inputProps={{
+                            className: 'App-input',
+                            placeholder: 'Search for TV shows'
+                        }}
+                        renderMenu={children =>
+                            <div className="App-autocomplete">
+                                {children}
+                            </div>}
+                        renderItem={(item, isHighlighted) =>
+                            <div
+                                className={`App-autocomplete-item ${isHighlighted
+                                    ? 'item-highlighted'
+                                    : ''}`}
+                                key={item.id}
+                            >
+                                {item.name}
+                            </div>}
                     />
-                </div>
-
-                <div>
-                    {searchResults.map(result =>
-                        <div key={result.id}>
-                            {result.name}
-                        </div>
-                    )}
                 </div>
             </div>
         )
