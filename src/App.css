@@ -12,6 +12,16 @@
   height: 150px;
   padding: 20px;
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-input {
+  width: 80%;
+  height: 38px;
+  font-size: 15px;
+  padding: 8px 16px;
 }
 
 .App-intro {
